@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from lexicon.lexicon import LEXICON, LEXICON_COMMANDS
+
+from source.lexicon.lexicon import LEXICON
 
 
 def create_schedule_keyboard(*args: str) -> InlineKeyboardMarkup:

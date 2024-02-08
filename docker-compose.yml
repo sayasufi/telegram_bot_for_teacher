@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  web:
+    build: ./
+    command: python bot.py
+    volumes:
+      - ./source/:/usr/src/app/
+    ports:
+      - "8000:8000"
+    env_file:
+      - source/.env
+    depends_on:
+      - mongo
+  mongo:
+    ports:
+      - '27017:27017'
+    container_name: dkrcomp-mongo
+    restart: always
+    logging:
+      options:
+        max-size: 1g
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=lunortal
+      - MONGO_INITDB_ROOT_PASSWORD=345semr98
+    image: mongo
+

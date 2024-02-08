@@ -2,9 +2,8 @@ import pymongo
 
 # устанавливаем соединение с MongoDB
 # MongoDB должна быть запущена на компьютере, 27017 - стандартный порт
-db_client = pymongo.MongoClient(
-    "mongodb://localhost:27017/"
-)  # MongoClient('localhost', 27017)
+db_client = pymongo.MongoClient('localhost',
+                                27017)
 
 # подключаемся к БД pyloungedb, если её нет, то будет создана
 current_db = db_client["pyloungedb"]  # dictionary style
@@ -78,7 +77,7 @@ print(
     "Все ютуберы к которых > 10 000 подписчиков, отсортированные по полю title"
 )
 for channel in collection.find({"subscribers": {"$gt": 10000}}).sort(
-    "title"
+        "title"
 ):  # sort('title', -1)
     print(channel)
 
@@ -87,13 +86,13 @@ print(
     "Все имена ютуберов у которых > 10 000 подписчиков И просмотров больше 1 000 000"
 )
 for channel in collection.find(
-    {"$and": [{"subscribers": {"$gt": 10000}}, {"views": {"$gt": 1000000}}]}
+        {"$and": [{"subscribers": {"$gt": 10000}}, {"views": {"$gt": 1000000}}]}
 ):
     print(channel["title"])
 
 print("каналы, название которых соответствует регулярному выражению ^Py(.*?)")
 for channel in collection.find({"title": {"$regex": "^Py(.*?)"}}).limit(
-    2
+        2
 ):  # groupby, orderby, skip и т.д.
     print(channel["title"], " ", channel["subscribers"])
 
@@ -122,18 +121,18 @@ print("После всех обновлений. Каналы с более 100 
 for channel in collection.find({"subscribers": {"$gt": 100000}}):
     print(channel)
 
-# удаление
-collection.delete_one(
-    {"title": {"$regex": "^Senior"}}
-)  # delete_many, find_one_and_delete
-print("После удаления:")
-for channel in collection.find():
-    print(channel)
+# # удаление
+# collection.delete_one(
+#     {"title": {"$regex": "^Senior"}}
+# )  # delete_many, find_one_and_delete
+# print("После удаления:")
+# for channel in collection.find():
+#     print(channel)
+#
+# # создание индексов
+# collection.create_index("title")  # , unique=True
 
-# создание индексов
-collection.create_index("title")  # , unique=True
-
-# удаление коллекции
-collection.drop()
-# удаление бд
-db_client.drop_database("pyloungedb")
+# # удаление коллекции
+# collection.drop()
+# # удаление бд
+# db_client.drop_database("pyloungedb")

@@ -1,16 +1,14 @@
 import datetime
-from copy import deepcopy
 
 from aiogram import F, Router
 from aiogram.filters import Command, StateFilter
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import Message, CallbackQuery
 
-from database.database import week_days
-from lexicon.lexicon import LEXICON
-from keyboards.other_keyboard import create_schedule_keyboard
-from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import State, StatesGroup
+from source.database.database import week_days
+from source.keyboards.other_keyboard import create_schedule_keyboard
 from .user_handlers import client
 
 router = Router()

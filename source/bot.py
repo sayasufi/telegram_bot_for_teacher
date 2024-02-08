@@ -2,15 +2,16 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
+from pymongo.mongo_client import MongoClient
+
 from config_data.config import Config, load_config
 from handlers import earnings_handlers, user_handlers
 from keyboards.main_menu import set_main_menu
-from pymongo.mongo_client import MongoClient
 
 # Загружаем конфиг в переменную config
 config: Config = load_config()
 # Подключаемся к базе данных MongoDB
-client = MongoClient(config.tg_bot.url)
+client = MongoClient("localhost", 27017)
 # Инициализируем логгер
 logger = logging.getLogger(__name__)
 
@@ -21,7 +22,7 @@ async def main():
     logging.basicConfig(
         level=logging.DEBUG,
         format="%(filename)s:%(lineno)d #%(levelname)-8s "
-        "[%(asctime)s] - %(name)s - %(message)s",
+               "[%(asctime)s] - %(name)s - %(message)s",
     )
 
     # Выводим в консоль информацию о начале запуска бота

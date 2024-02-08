@@ -3,14 +3,15 @@ from datetime import datetime
 
 from aiogram import F, Router
 from aiogram.filters import Command, CommandStart, StateFilter
-from aiogram.fsm.storage.memory import MemoryStorage
-from aiogram.types import Message, CallbackQuery
-from database.database import schedule, price_per_lesson
-from lexicon.lexicon import LEXICON
-from keyboards.other_keyboard import create_schedule_keyboard
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state, State, StatesGroup
-from bot import client
+from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import Message, CallbackQuery
+
+from source.bot import client
+from source.database.database import schedule, price_per_lesson
+from source.keyboards.other_keyboard import create_schedule_keyboard
+from source.lexicon.lexicon import LEXICON
 
 router = Router()
 
